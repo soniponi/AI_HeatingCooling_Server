@@ -2,6 +2,8 @@
 
 import numpy as np
 
+class dqn:
+
     # INTRODUCING AND INITIALIZING ALL THE PARAMETERS AND VARIABLES OF THE DQN
     def __init__(self, max_memory = 100, discount = 0.9):
         self.memory = list()
@@ -22,13 +24,13 @@ import numpy as np
         inputs = np.zeros((min(len_memory, batch_size), num_inputs))
         targets = np.zeros((min(len_memory, batch_size), num_outputs))
         for i, idx in enumerate(np.random.randint(0, len_memory, size = min(len_memory, batch_size))):
-                    current_state, action, reward, next_state = self.memory[idx][0]
-                    game_over = self.memory[idx][1]
-                    inputs[i] = current_state
-                    targets[i] = model.predict(current_state)[0]
-                    Q_sa = np.max(model.predict(next_state)[0])
-                    if game_over:
-                    targets[i, action] = reward
-                    else:
-                    targets[i, action] = reward + self.discount * Q_sa
+            current_state, action, reward, next_state = self.memory[idx][0]
+            game_over = self.memory[idx][1]
+            inputs[i] = current_state
+            targets[i] = model.predict(current_state)[0]
+            Q_sa = np.max(model.predict(next_state)[0])
+            if game_over:
+                targets[i, action] = reward
+            else:
+                targets[i, action] = reward + self.discount * Q_sa
         return inputs, targets
