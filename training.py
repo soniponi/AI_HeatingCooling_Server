@@ -18,7 +18,7 @@ rn.seed(12345)
 epsilon = 0.3
 number_actions = 5
 direction_boundary = (number_actions - 1) / 2
-number_epochs = 100
+number_epochs = 10
 max_memory = 3000
 batch_size = 512
 temperature_step = 1.5
